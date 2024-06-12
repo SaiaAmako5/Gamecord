@@ -35,7 +35,7 @@ module.exports = class GuessThePokemon extends events {
     this.pokemon = {};
   }
   
-if (options.startMessage.trim().length > 0) {
+if (this.options.startMessage) {
     const msg = await this.sendMessage({ content: options.startMessage });
 };
 
@@ -68,7 +68,7 @@ if (options.startMessage.trim().length > 0) {
 
     const attachment = new AttachmentBuilder(this.pokemon.questionImage, { name: 'question-image.png' });
     
-if(options.startMessage.trim().length === 0) {
+if(this.options.startMessage) {
     const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
     } else {
    this.msg.edit({ embeds: [embed], files: [attachment] });
