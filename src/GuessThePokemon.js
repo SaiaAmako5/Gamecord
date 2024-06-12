@@ -35,7 +35,7 @@ module.exports = class GuessThePokemon extends events {
     this.pokemon = {};
   }
   
-if(options.startMessage.trim().length > 0) {
+if (options.startMessage.trim().length > 0) {
     const msg = await this.sendMessage({ content: options.startMessage });
 };
 
