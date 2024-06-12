@@ -71,7 +71,7 @@ if(options.startMessage) {
 if(!options.startMessage) {
     const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
     } else {
-   this.msg.edit({ embeds: [embed], files: [attachment] });
+   msg.edit({ embeds: [embed], files: [attachment] });
     };
 
     const filter = (m) => m.author.id === this.message.author.id;
