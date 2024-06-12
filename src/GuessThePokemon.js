@@ -35,9 +35,13 @@ module.exports = class GuessThePokemon extends events {
     this.pokemon = {};
   }
   
+if(options.startMessage) {
+    const msg = await this.sendMessage({ content: options.startMessage });
+};
+
   async sendMessage(content) {
-    if (this.options.isSlashGame) return await this.message.editReply(content);
-    else return await this.message.channel.send(content);
+    if (this.options.isSlashGame) return await this.message.editReply(content).catch(e => {});
+    else return await this.message.channel.send(content).catch(e => {});
   }
 
 
@@ -63,10 +67,11 @@ module.exports = class GuessThePokemon extends events {
 
 
     const attachment = new AttachmentBuilder(this.pokemon.questionImage, { name: 'question-image.png' });
-    if(!msgid) {
+    
+if(!options.startMessage) {
     const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
     } else {
-    const msg = await this.msg.edit({ embeds: [embed], files: [attachment] });
+   this.msg.edit({ embeds: [embed], files: [attachment] });
     };
 
     const filter = (m) => m.author.id === this.message.author.id;
@@ -101,4 +106,4 @@ module.exports = class GuessThePokemon extends events {
     const attachment = new AttachmentBuilder(this.pokemon.answerImage, { name: 'answer-image.png' });
     return msg.edit({ content: this.options.winMessage.replace('{pokemon}', this.pokemon.name), embeds: [embed], files: [attachment] });
   }
-}
+  }
