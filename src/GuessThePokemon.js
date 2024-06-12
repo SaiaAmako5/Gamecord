@@ -63,7 +63,11 @@ module.exports = class GuessThePokemon extends events {
 
 
     const attachment = new AttachmentBuilder(this.pokemon.questionImage, { name: 'question-image.png' });
-    const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
+    if(!msg) {
+    var msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
+    } else {
+    this.msg.edit({ embeds: [embed], files: [attachment] });
+    };
 
     const filter = (m) => m.author.id === this.message.author.id;
     const collector = this.message.channel.createMessageCollector({ idle: this.options.timeoutTime, filter: filter });
