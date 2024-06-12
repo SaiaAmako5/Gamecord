@@ -50,7 +50,7 @@ module.exports = class GuessThePokemon extends events {
     }
 
     if (this.options.startMessage) {
-    const msg = await this.sendMessage({ content: this.options.startMessage });
+    const msg = this.sendMessage({ content: this.options.startMessage });
 };
 
     const result = await fetch('https://api.gamecord.xyz/pokemon').then(res => res.json()).catch(e => { return {} });
