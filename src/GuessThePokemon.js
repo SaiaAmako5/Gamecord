@@ -35,9 +35,6 @@ module.exports = class GuessThePokemon extends events {
     this.pokemon = {};
   }
   
-if (this.options.startMessage) {
-    const msg = await this.sendMessage({ content: options.startMessage });
-};
 
   async sendMessage(content) {
     if (this.options.isSlashGame) return await this.message.editReply(content).catch(e => {});
@@ -51,6 +48,10 @@ if (this.options.startMessage) {
       this.message.author = this.message.user;
       this.options.isSlashGame = true;
     }
+
+    if (this.options.startMessage) {
+    const msg = await this.sendMessage({ content: options.startMessage });
+};
 
     const result = await fetch('https://api.gamecord.xyz/pokemon').then(res => res.json()).catch(e => { return {} });
     if (!result.data) return this.sendMessage({ content: this.options.errMessage });
